@@ -1,4 +1,4 @@
-@Regression @login
+@Regression
 
 Feature: Library app login feature
 
@@ -11,7 +11,7 @@ Feature: Library app login feature
   Background: For the scenarios in the feature file, user is expected to be on login page
     Given user is on the library login page
 
-  @librarian @wip
+  @librarian
   Scenario: Login as librarian
     When user enters librarian username
     And user enters librarian password
@@ -23,7 +23,7 @@ Feature: Library app login feature
     And user enters student password
     Then user should see the dashboard
 
-  @admin @employee
+  @admin
   Scenario: Login as student
     When user enters admin username
     And user enters admin password
