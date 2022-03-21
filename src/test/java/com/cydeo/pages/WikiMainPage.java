@@ -5,19 +5,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class GoogleSearchPage {
+public class WikiMainPage {
 
-    public GoogleSearchPage() {
+    public WikiMainPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
 
     // We can start locating web elements using @FindBy annotation
-    @FindBy(xpath = "//input[@name='q']")
+    @FindBy(xpath = "//input[@id='searchInput']")
     public WebElement searchBox;
 
+    @FindBy(xpath = "//button[@type='submit']")
+    public WebElement searchButton;
 
+    @FindBy(xpath = "//h1[@id='firstHeading']")
+    public WebElement mainHeader;
 
 
 }
-

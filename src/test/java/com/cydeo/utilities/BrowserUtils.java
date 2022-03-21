@@ -47,6 +47,11 @@ public class BrowserUtils {
         Assert.assertTrue(actualTitle.contains(expectedTitle));
     }
 
+    public static void verifyURLContains(String expectedInURL) {
+        Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains(expectedInURL));
+    }
+
+
     public static void scrollPage(int y, int x){
         // Use below JavaScript method and scroll
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();

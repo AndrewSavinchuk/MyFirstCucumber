@@ -5,10 +5,7 @@ package com.cydeo.step_definitions;
 
 
 import com.cydeo.utilities.Driver;
-import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeStep;
+import io.cucumber.java.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -20,21 +17,24 @@ public class Hooks {
         System.out.println("====Setting up browser user cucumber @Before====");
     }
 
-    @Before(value = "@login", order = 1)
+    //@Before(value = "@login", order = 1)
     public void setupScenarioForLogins() {
         System.out.println("====This will only apply to scenarios with @login tag====");
     }
 
-    @Before("@db")
+    //@Before("@db")
     public void setupForDatabaseScenarios() {
         System.out.println("====This will only apply to scenarios with @db tag====");
     }
 
-    @After
-    public void teardownScenario() {
+   // @After
+    public void teardownScenario(Scenario scenario) {
 
-        byte [] screenshot = ((TakesScreenshot)Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
-
+// scenario.isFailed --> if scenario fails this method will return TRUE boolean value
+        if (scenario.isFailed()) {
+            byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", scenario.getName());
+        }
         Driver.closeDriver();
         System.out.println("====Setting up browser user cucumber @After====");
 //        System.out.println("====Scenario ended / if failed take a screenshot====");
@@ -42,12 +42,12 @@ public class Hooks {
     }
 
     //@BeforeStep
-    public void setupStep(){
+    public void setupStep() {
         System.out.println("---- applying setup using @BeforeStep");
     }
 
     //@AfterStep
-    public void afterStep(){
+    public void afterStep() {
         System.out.println("---- applying tearDown using @AfterStep");
     }
 
